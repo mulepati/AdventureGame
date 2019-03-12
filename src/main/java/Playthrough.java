@@ -8,6 +8,10 @@ public class Playthrough {
         this.book = book;
     }
 
+    public LinkedList<PageNode> getChoices() {
+        return choices;
+    }
+
     public void playGame() { }
 
     public void playGame(String option) { }
