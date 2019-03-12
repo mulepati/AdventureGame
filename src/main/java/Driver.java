@@ -9,6 +9,7 @@ public class Driver {
 
     public void play() throws FileNotFoundException {
         book = ParseFile.parseFile("src/main/resources/book1.csv");
+        book.to();
         playthrough = new Playthrough(book);
         playthrough.playGame();
 
