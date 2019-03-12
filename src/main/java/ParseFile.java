@@ -14,17 +14,18 @@ public class ParseFile {
             String line = input.nextLine();
             parts = line.split(",(?=([^\"]*\"[^\"]*\")*[^\"]*$)");
             boolean ending = false;
-            for (String temp : parts) {
-                if(temp.contains("\"")) {
-                    PageNode node = new PageNode(count, temp.substring(1, temp.length() - 1), ending);
+            for (String lineSplit : parts) {
+                if (lineSplit.contains("\"")) {
+                    PageNode node = new PageNode(count,lineSplit.substring(1, lineSplit.length() - 1), ending);
                     pages.put(count, node);
-                }else if(temp.contains("ENDING")) {
+                }else if (lineSplit.contains("ENDING")) {
                     ending = true;
                 } else {
-                    if(recording.containsKey(count)) {
-                        recording.get(count).add(Integer.valueOf(temp));
-                    } else{
-                        recording.put(count, new ArrayList<>(Integer.valueOf(temp)));
+                    if (recording.containsKey(count)) {
+                        recording.get(count).add(Integer.valueOf(lineSplit));
+                    } else {
+                        recording.put(count, new ArrayList<>());
+                        recording.get(count).add(Integer.valueOf(lineSplit));
                     }
                 }
             }
@@ -44,8 +45,8 @@ public class ParseFile {
             for (int j = 0; j < recording.get(i).size(); j++) {
                 current.addChild(pages.get(recording.get(i).get(j)));
             }
-            if(tree.getNode(i) != null) {
-                current = tree.getNode(i);
+            if (tree.getNode(i + 1) != null) {
+                current = tree.getNode(i + 1);
             }
         }
 
