@@ -10,6 +10,7 @@ public class PageNode {
     public PageNode() {
         this(-1, null, false);
     }
+
     public PageNode(int pageNumber, String text, boolean isEnding) {
         this.pageNumber = pageNumber;
         this.text = text;
@@ -24,6 +25,10 @@ public class PageNode {
         }
 
 
+    }
+
+    public boolean getIsEnding() {
+        return isEnding;
     }
 
     public int getPageNumber() {

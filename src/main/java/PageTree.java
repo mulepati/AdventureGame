@@ -45,6 +45,17 @@ public class PageTree {
         preOrderPrintHelper(root);
     }
 
+    public void truncateList(int value){
+        if(root.getChildren() != null && root.getPageNumber() != value) {
+            for (PageNode page : root.getChildren()) {
+                if (page.getPageNumber() == value) {
+                    root = page;
+                    break;
+                }
+            }
+        }
+    }
+
     private void preOrderPrintHelper(PageNode node) {
         if(node == null) {
             return;

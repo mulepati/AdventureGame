@@ -12,9 +12,39 @@ public class Playthrough {
         return choices;
     }
 
-    public void playGame() { }
+    public void playGame() {
+        Scanner sc = new Scanner(System.in);
+        PageNode current = book.getFirst();
+        choices.add(current);
+        while(!current.getIsEnding()) {
+            System.out.println(current);
+            StringBuilder choose = new StringBuilder("Choose an option : ");
+            List<Integer> legalPage = new ArrayList<>();
 
-    public void playGame(String option) { }
+            for (PageNode child : current.getChildren()) {
+                choose.append(child.getPageNumber() + " ");
+                legalPage.add(child.getPageNumber());
+            }
 
-    public void truncateChoices(int pageNumber) { }
+            System.out.println(choose.toString());
+            int choice = sc.nextInt();
+            if(book.getNode(choice) != null && legalPage.contains(choice)) {
+                current = book.getNode(choice);
+                choices.add(current);
+            }
+
+        }
+        System.out.println(current);
+
+    }
+
+    public void playGame(int option) {
+        if(book.getFirst().getPageNumber() == option) {
+            playGame();
+        }
+    }
+
+    public void truncateChoices(int pageNumber) {
+        book.truncateList(pageNumber);
+    }
 }
