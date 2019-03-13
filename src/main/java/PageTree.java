@@ -1,7 +1,5 @@
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class PageTree {
     private PageNode root;
@@ -37,7 +35,44 @@ public class PageTree {
 
     public List<PageNode> cheat(int desiredEnding) {
         List<PageNode> path = new ArrayList<>();
-        return null;
+        return cheatHelper(root, path, desiredEnding);
+//        Stack<PageNode> stack = new Stack<>();
+//        stack.push(root);
+//
+//        while(!stack.empty()) {
+//            PageNode current = stack.pop();
+//            path.add(current);
+//            if(current.getPageNumber() == desiredEnding) {
+//                break;
+//            } else if (current.getIsEnding()) {
+//                path.remove(current);
+//            }
+//            for (PageNode child: current.getChildren()) {
+//                stack.push(child);
+//            }
+//
+//        }
+//        return path;
+
+    }
+
+    private List<PageNode> cheatHelper(PageNode node, List<PageNode> track, int desiredEnding) {
+        if(node.getPageNumber() == desiredEnding) {
+            track.add(node);
+            return track;
+        }
+        track.add(node);
+        for (PageNode child : node.getChildren()) {
+            List<PageNode> path = cheatHelper(child, track, desiredEnding);
+            String paths = path.stream().map(page -> String.valueOf(page.getPageNumber())).collect(Collectors.joining("->"));
+            if(paths.contains(String.valueOf(desiredEnding))) {
+                return path;
+            }
+        }
+        if(node.getIsEnding()) {
+            track.remove(node);
+        }
+        return track;
 
     }
 
