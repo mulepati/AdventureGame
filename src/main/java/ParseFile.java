@@ -18,7 +18,7 @@ public class ParseFile {
                 if (lineSplit.contains("\"")) {
                     PageNode node = new PageNode(count,lineSplit.substring(1, lineSplit.length() - 1), ending);
                     pages.put(count, node);
-                }else if (lineSplit.contains("ENDING")) {
+                } else if (lineSplit.contains("ENDING")) {
                     ending = true;
                 } else {
                     if (recording.containsKey(count)) {
@@ -31,11 +31,7 @@ public class ParseFile {
             }
             count++;
         }
-
-
-
         return points(recording, pages);
-
     }
 
     private static PageTree points(Map<Integer, List<Integer>> recording, Map<Integer, PageNode> pages){
@@ -49,9 +45,7 @@ public class ParseFile {
                 current = tree.getNode(i + 1);
             }
         }
-
         return tree;
-
     }
 
 
