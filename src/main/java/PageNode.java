@@ -19,12 +19,9 @@ public class PageNode {
     }
 
     public void addChild(PageNode child) {
-        if(child != null) {
+        if (child != null) {
             children.add(child);
-
         }
-
-
     }
 
     public boolean getIsEnding() {

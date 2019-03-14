@@ -16,17 +16,14 @@ public class PageTree {
         Queue<PageNode> queue = new LinkedList<>();
         queue.add(root);
 
-        while(!queue.isEmpty()) {
+        while (!queue.isEmpty()) {
             PageNode element = queue.remove();
-            if(element.getPageNumber() == pageNumber) {
+            if (element.getPageNumber() == pageNumber) {
                 return element;
             }
-
             queue.addAll(element.getChildren());
         }
-
         return null;
-
     }
 
     public PageNode getFirst() {
@@ -36,28 +33,11 @@ public class PageTree {
     public List<PageNode> cheat(int desiredEnding) {
         List<PageNode> path = new ArrayList<>();
         return cheatHelper(root, path, desiredEnding);
-//        Stack<PageNode> stack = new Stack<>();
-//        stack.push(root);
-//
-//        while(!stack.empty()) {
-//            PageNode current = stack.pop();
-//            path.add(current);
-//            if(current.getPageNumber() == desiredEnding) {
-//                break;
-//            } else if (current.getIsEnding()) {
-//                path.remove(current);
-//            }
-//            for (PageNode child: current.getChildren()) {
-//                stack.push(child);
-//            }
-//
-//        }
-//        return path;
-
     }
 
-    private List<PageNode> cheatHelper(PageNode node, List<PageNode> track, int desiredEnding) {
-        if(node.getPageNumber() == desiredEnding) {
+    private List<PageNode> cheatHelper(PageNode node, List<PageNode> listNode, int desiredEnding) {
+        List<PageNode> track = new ArrayList<>(listNode);
+        if (node.getPageNumber() == desiredEnding) {
             track.add(node);
             return track;
         }
@@ -65,15 +45,14 @@ public class PageTree {
         for (PageNode child : node.getChildren()) {
             List<PageNode> path = cheatHelper(child, track, desiredEnding);
             String paths = path.stream().map(page -> String.valueOf(page.getPageNumber())).collect(Collectors.joining("->"));
-            if(paths.contains(String.valueOf(desiredEnding))) {
+            if (paths.contains(String.valueOf(desiredEnding))) {
                 return path;
             }
         }
-        if(node.getIsEnding()) {
+        if (node.getIsEnding()) {
             track.remove(node);
         }
         return track;
-
     }
 
     public void preOrderPrint() {
@@ -81,7 +60,7 @@ public class PageTree {
     }
 
     public void truncateList(int value){
-        if(root.getChildren() != null && root.getPageNumber() != value) {
+        if (root.getChildren() != null && root.getPageNumber() != value) {
             for (PageNode page : root.getChildren()) {
                 if (page.getPageNumber() == value) {
                     root = page;
@@ -92,7 +71,7 @@ public class PageTree {
     }
 
     private void preOrderPrintHelper(PageNode node) {
-        if(node == null) {
+        if (node == null) {
             return;
         }
         System.out.println(node);

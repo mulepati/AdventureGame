@@ -16,7 +16,7 @@ public class Playthrough {
         Scanner sc = new Scanner(System.in);
         PageNode current = book.getFirst();
         choices.add(current);
-        while(!current.getIsEnding()) {
+        while (!current.getIsEnding()) {
             System.out.println(current);
             StringBuilder choose = new StringBuilder("Choose an option : ");
             List<Integer> legalPage = new ArrayList<>();
@@ -28,18 +28,16 @@ public class Playthrough {
 
             System.out.println(choose.toString());
             int choice = sc.nextInt();
-            if(book.getNode(choice) != null && legalPage.contains(choice)) {
+            if (book.getNode(choice) != null && legalPage.contains(choice)) {
                 current = book.getNode(choice);
                 choices.add(current);
             }
-
         }
         System.out.println(current);
-
     }
 
     public void playGame(int option) {
-        if(book.getFirst().getPageNumber() == option) {
+        if (book.getFirst().getPageNumber() == option) {
             playGame();
         }
     }
