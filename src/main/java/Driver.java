@@ -9,7 +9,6 @@ public class Driver {
 
     public void play() throws FileNotFoundException {
         book = ParseFile.parseFile("src/main/resources/book1.csv");
-        book.to();
         playthrough = new Playthrough(book);
         playthrough.playGame();
 
@@ -19,7 +18,7 @@ public class Driver {
 
     public void playFrom(int pageNumber) {
         playthrough.truncateChoices(pageNumber);
-        playthrough.playGame(String.valueOf(pageNumber));
+        playthrough.playGame(pageNumber);
     }
 
     public void showPath() {

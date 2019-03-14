@@ -7,12 +7,6 @@ public class PageNode {
     private boolean isEnding;
     private Set<PageNode> children;
 
-
-    public PageNode(String line ) {
-        text = line;
-
-    }
-
     public PageNode() {
         this(-1, null, false);
     }
@@ -24,15 +18,30 @@ public class PageNode {
         children = new HashSet<>();
     }
 
-    public int getPageNumber() {return pageNumber; }
+    public void addChild(PageNode child) {
+        if(child != null) {
+            children.add(child);
+
+        }
+
+
+    }
+
+    public boolean getIsEnding() {
+        return isEnding;
+    }
+
+    public int getPageNumber() {
+        return pageNumber;
+    }
 
     public Set<PageNode> getChildren() {
-        return  children;
+        return children;
     }
 
-    public void addChild(PageNode node) {
-        children.add(node);
+    public String toString() {
+        return text;
     }
 
-    public String toString() {return text;}
+
 }
